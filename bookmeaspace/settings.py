@@ -25,7 +25,7 @@ SECRET_KEY = 'y!rlh^0l0hdd9kz7ocn0*$a_-1m*xu)0h*oy9jzz51^292xh$f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['44.232.18.218','127.0.0.1']
+ALLOWED_HOSTS = ['bookmea.space','44.232.18.218','127.0.0.1']
 
 
 # Application definition
