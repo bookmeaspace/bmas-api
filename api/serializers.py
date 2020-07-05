@@ -21,12 +21,21 @@ class getStatusSerializer(serializers.HyperlinkedModelSerializer):
         model= Booking_Status_Field
         fields=("booking_status_field_choice",)
 
+class getCourtsSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Court
+        fields= ("courtid",)
+
+
+
 class getBookingsSerializer(serializers.HyperlinkedModelSerializer):
     booker = getUsersWithoutPasswordSerializer()
     center = getCenterSerializer()
     status = getStatusSerializer()
+    courts = getCourtsSerializer(many=True)
+
     class Meta:
         model = Booking 
-        fields= ("id", "booker", "center", "booking_slot_start", "booking_slot_end", "status")
+        fields= ("id", "courts", "booker", "center", "booking_slot_start", "booking_slot_end", "status")
 
 
