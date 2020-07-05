@@ -10,7 +10,6 @@ from .filters import *
 
 class getBookingsByUser(viewsets.ModelViewSet):
     serializer_class = getBookingsSerializer
-    user_queryset = User.objects.all()
     queryset = Booking.objects.all()
     http_method_names = ['get', 'head']
     ordering_fields=['id']
@@ -24,7 +23,6 @@ class getUsers(viewsets.ModelViewSet):
     ordering_fields=['id']
     filter_backends=(DjangoFilterBackend,)
     filterset_class = usersFilterSet
-
 
 
 

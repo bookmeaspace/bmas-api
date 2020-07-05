@@ -4,8 +4,8 @@ from . import views
 
 router=routers.DefaultRouter()
 
-router.register(r'getBookingsByUser', views.getBookingsByUser, basename='getBookingsByUser')
-router.register(r'getUsers', views.getUsers, basename='getUsers')
+router.register(r'getUsers', views.getUsers, basename='User')
 
+router.register(r'getBookingsByUser', views.getBookingsByUser, basename='getBookingsByUser')
 
 urlpatterns = router.urls

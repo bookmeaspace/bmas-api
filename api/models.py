@@ -8,6 +8,7 @@ class Center(models.Model):
     lat = models.FloatField()
     lng = models.FloatField()
     numCourts = models.IntegerField()
+    price = models.IntegerField()
 
     def __str__(self):
         return(self.name+" "+self.address)
@@ -15,11 +16,11 @@ class Center(models.Model):
 
 
 class Court(models.Model):
-    center = models.CharField(max_length=100)
+    center = models.ForeignKey("Center", on_delete=models.CASCADE)
     courtid = models.IntegerField()
 
     def __str__(self):
-        return(self.center+" "+str(self.courtid))
+        return(self.center.name+" "+str(self.courtid))
 
 
 class Group(models.Model):
@@ -45,10 +46,24 @@ class Booking(models.Model):
     booking_slot_end = models.DateTimeField()
     booker = models.ForeignKey("User", on_delete=models.CASCADE)
     group = models.CharField(max_length=100)
-    status = models.ManyToManyField('Booking_Status_Field')
+    status = models.ForeignKey('Booking_Status_Field', on_delete=models.CASCADE)
 
     def __str__(self):
         return(self.center.name+" Court "+str(self.courts)+" "+str(self.booking_slot_start)+"-"+str(self.booking_slot_end))
+    
+    @property
+    def Booking_Court_id(self):
+        return self.courts.courtid
+
+    @property
+    def Booking_Center(self):
+        return self.center.name
+
+    @property
+    def Booker_Email(self):
+        return self.booker.email
+
+
 
 class Booking_Status_Field(models.Model):
     booking_status_field_choice=models.CharField(max_length=10)
