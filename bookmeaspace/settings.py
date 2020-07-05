@@ -97,14 +97,13 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'bookmeaspace-db',
         'CLIENT': {
-            'HOST': "mongodb+srv://"+MONGO_DB_CREDS["USER"]+":"+MONGO_DB_CREDS["PASSWORD"]+"@bookmeaspace-db.vbpdv.mongodb.net/bmas-mongo-db?retryWrites=true&w=majority",
-            'USER': MONGO_DB_CREDS['USER'],
-            'PASSWORD': MONGO_DB_CREDS['PASSWORD']
+            'host': "mongodb+srv://"+MONGO_DB_CREDS["USER"]+":"+MONGO_DB_CREDS["PASSWORD"]+"@bookmeaspace-db.vbpdv.mongodb.net/bmas-mongo-db?retryWrites=true&w=majority",
+            'username': MONGO_DB_CREDS['USER'],
+            'password': MONGO_DB_CREDS['PASSWORD']
             }
         }
 }
 
-print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

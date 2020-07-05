@@ -19,7 +19,7 @@ class Group(models.Model):
     members = models.ManyToManyField('User')
 
 class User(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     email = models.EmailField()
     phone = models.CharField(max_length=50)
     password = models.CharField(max_length=100)
@@ -30,6 +30,6 @@ class Booking(models.Model):
     date = models.IntegerField()
     time = models.IntegerField()
     booker = models.CharField(max_length=100)
-    group = models.CharField(max_length=100, null=True)
+    group = models.CharField(max_length=100)
     status = models.IntegerField()
 
