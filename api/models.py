@@ -9,6 +9,11 @@ class Center(models.Model):
     lng = models.FloatField()
     numCourts = models.IntegerField()
 
+    def __str__(self):
+        return(self.name+" "+self.address)
+
+
+
 class Court(models.Model):
     center = models.CharField(max_length=100)
     courtid = models.IntegerField()
@@ -29,17 +34,21 @@ class User(models.Model):
     password = models.CharField(max_length=100)
     permission = models.CharField(max_length=100)
 
+    def __str__(self):
+        return(self.name+" "+self.email+" "+self.phone)
+
+
 class Booking(models.Model):
-    center = models.CharField(max_length=100)
+    center = models.ForeignKey("Center", on_delete=models.CASCADE)
     courts = models.ManyToManyField('Court')
     booking_slot_start = models.DateTimeField()
     booking_slot_end = models.DateTimeField()
-    booker = models.CharField(max_length=100)
+    booker = models.ForeignKey("User", on_delete=models.CASCADE)
     group = models.CharField(max_length=100)
     status = models.ManyToManyField('Booking_Status_Field')
 
     def __str__(self):
-        return(self.center+" Court "+str(self.courts)+" "+str(self.booking_slot_start)+"-"+str(self.booking_slot_end))
+        return(self.center.name+" Court "+str(self.courts)+" "+str(self.booking_slot_start)+"-"+str(self.booking_slot_end))
 
 class Booking_Status_Field(models.Model):
     booking_status_field_choice=models.CharField(max_length=10)
