@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'api.apps.ApiConfig',
     'rest_framework',
-    'django_filters,
+    'django_filters',
     'bookmeaspace',
     'bookmeaspace.apps.BookmeaspaceConfig',
 ]
