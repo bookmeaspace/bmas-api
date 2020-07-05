@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import json
+
 from os.path import expanduser
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,13 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'api',
-    'app.apps.AppConfig',
-    'api.apps.ApiConfig',
     'rest_framework',
     'django_filters',
     'bookmeaspace',
-    'bookmeaspace.apps.BookmeaspaceConfig',
-]
+    'djongo',
+
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +62,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bookmeaspace.urls'
+
+
+try:
+    MONGO_DB_CREDS = json.load(open("/home/bitnami/keys/bmas-mongoDB.json"))
+except:
+    MONGO_DB_CREDS = json.load(open(expanduser('~')+"/keys/bmas-mongoDB.json"))
+
 
 TEMPLATES = [
     {
@@ -83,11 +94,17 @@ WSGI_APPLICATION = 'bookmeaspace.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'djongo',
+        'NAME': 'bookmeaspace-db',
+        'CLIENT': {
+            'HOST': "mongodb+srv://"+MONGO_DB_CREDS["USER"]+":"+MONGO_DB_CREDS["PASSWORD"]+"@bookmeaspace-db.vbpdv.mongodb.net/bmas-mongo-db?retryWrites=true&w=majority",
+            'USER': MONGO_DB_CREDS['USER'],
+            'PASSWORD': MONGO_DB_CREDS['PASSWORD']
+            }
+        }
 }
 
+print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
