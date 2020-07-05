@@ -30,6 +30,6 @@ class Booking(models.Model):
     date = models.IntegerField()
     time = models.IntegerField()
     booker = models.CharField(max_length=100)
-    group = models.CharField('Group', null=True)
+    group = models.CharField(max_length=100, null=True)
     status = models.IntegerField()
 
