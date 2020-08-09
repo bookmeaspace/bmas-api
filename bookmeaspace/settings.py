@@ -51,6 +51,13 @@ INSTALLED_APPS = [
 
     ]
 
+REST_FRAMEWORK={
+        'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend'),
+#        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+#        'PAGE_SIZE': 50,
+        }
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -140,5 +147,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+STATIC_ROOT =  '/opt/bitnami/apps/django/django_projects/bookmeaspace/bookmeaspace/static/'
 STATIC_URL = '/static/'
